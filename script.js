@@ -1,8 +1,3 @@
-//affichage de la date "more friendly"
-const days = ["Lundi","Mardi","Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
-const months = ["Janvier","Février","Mars", "Avril", "Mai", "Juin", "Juillet",
-"Aout","Septembre","Octobre", "Novembre", "Décembre"];
-
 // Charger le fichier de configuration JSON
 function fetchWeatherAndUpdate() {
   fetch('config.json')
@@ -14,7 +9,7 @@ function fetchWeatherAndUpdate() {
       const appid = data.appid;
       const units = data.units || 'metric';
       
-      // Former l'URL finale en ajoutant la ville et l'appid
+      // URL finale en ajoutant la ville et l'appid
       const weatherApiUrl = baseWeatherApiUrl + city + '&appid=' + appid + '&units=' + units;
       
       // Utiliser l'URL de l'API météo pour faire une requête
@@ -34,9 +29,10 @@ function fetchWeatherAndUpdate() {
     });
   }
 
+  //affichage de la date plus User Friendly
   function getFriendlyDate() {
     const time = new Date();
-    const dayOfWeek = time.getDay(); // Jour de la semaine (0 = dimanche, 1 = lundi, ..., 6 = samedi)
+    const dayOfWeek = time.getDay();
     const dayOfMonth = time.getDate();
     const monthIndex = time.getMonth();
     const year = time.getFullYear();
@@ -54,10 +50,12 @@ function fetchWeatherAndUpdate() {
   function showWeatherData(weatherData){
     const result = document.getElementById("container");
 
+    /* affichage icone météo*/
     const iconBaseUrl = 'https://openweathermap.org/img/wn/';
     const iconValue = weatherData.weather[0].icon;
     const iconUrl = iconBaseUrl + iconValue + '.png';
 
+    /* affichage infos météo dans le div */
     result.innerHTML = ' <div class="other-info" id="info"><div class="header"><div id="cityName">'+ weatherData.name+'</div>'+
     '<div id="country">'+ weatherData.sys.country+'</div></div></br>'+
     '<div id="dateE1">'+ getFriendlyDate()+'</div></br><hr></br>'+
@@ -71,5 +69,5 @@ function fetchWeatherAndUpdate() {
 }
 
 fetchWeatherAndUpdate();
-//appelle l'API une fois/heure
+//appelle l'API une fois/heure (en millisecondes)
 setInterval(fetchWeatherAndUpdate,3600000 )
