@@ -1,0 +1,75 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap');
+*{
+    color: white;
+}
+
+h1{
+    color: black;
+}
+
+body {
+    font-family : 'Wix Madefor Display', sans-serif;
+    font-size: 30 px;
+    background-image: url(/ressources/retoucheOk.bmp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    background-position: center;
+    animation: moveBackground 30s linear infinite;
+}
+
+/* animation cloud */
+@keyframes moveBackground {
+    0% { background-position: 0 0; } /* Position initiale (en haut à gauche) */
+    50% { background-position: 0 50%; } 
+    100% { background-position: 0 0; }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+img{
+    height: 60px;
+    width: auto;
+}
+
+.temperatureDay,.temperatureFeelLike {
+    flex: 1; 
+    padding: 10px;
+}
+
+.dateE1{
+    text-align: center;
+}
+
+.weather-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.title{
+    text-align:center ;
+}
+
+#cityName{
+    font-size: 50px;
+}
+
+#country{
+    font-size: 25px;
+}
+
+.other-info{
+    font-size: 17px;
+    background-color: rgba(29, 28, 28, 0.75);
+    margin: 50px;
+    padding: 50px;
+    border-radius: 30px;
+    border: 2px solid white;
+}
