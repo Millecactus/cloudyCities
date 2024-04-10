@@ -77,3 +77,24 @@ img{
     border: 2px solid white;
     margin: 0 auto; /* Centrage horizontal */
 }
+
+@media screen and (max-width: 600px) {
+   
+    *{
+      font-size: 14px; /* Réduire la taille du texte dans l'en-tête */
+    }
+
+    #cityName{
+        font-size: 30px;
+    }
+    
+    #country{
+        font-size: 18px;
+    }
+
+    .weather-item{
+        display: flow-root;
+        justify-content: space-between;
+    }
+  
+  }
