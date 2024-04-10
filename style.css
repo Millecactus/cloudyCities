@@ -19,6 +19,7 @@ body {
     background-color: white;
     background-position: center;
     animation: moveBackground 30s linear infinite;
+    
 }
 
 /* animation cloud */
@@ -30,6 +31,7 @@ body {
 
 .container {
     display: flex;
+    width: 50%;
     justify-content: center;
 }
 
@@ -71,5 +73,7 @@ img{
     margin: 50px;
     padding: 50px;
     border-radius: 30px;
+    width: 30%;
     border: 2px solid white;
+    margin: 0 auto; /* Centrage horizontal */
 }

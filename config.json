@@ -1,6 +1,6 @@
 {
     "city": "Bordeaux",
-    "base_weather_api_url": "http://api.openweathermap.org/data/2.5/weather?q=",
+    "base_weather_api_url": "https://api.openweathermap.org/data/2.5/weather?q=",
     "appid": "a7cf38af154e66eea7655c94706f9bd4",
     "units": "metric"
 }
