@@ -1,27 +1,9 @@
-const dateE1 = document.getElementById("dateE1");
-const temperatureDay = document.getElementById("temperatureDay");
-const temperatureFeelLike = document.getElementById("temperatureFeelLike");
-const humidity = document.getElementById("humidity");
-const pressure = document.getElementById("pressure");
-const windSpeed = document.getElementById("wind-speed");
-const items= document.getElementById("weather-item");
-const cityName= document.getElementById("cityName");
-const description= document.getElementById("description");
-const country = document.getElementById("country");
-const icon = document.getElementById("weather-icon");
+//affichage de la date "more friendly"
 const days = ["Lundi","Mardi","Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 const months = ["Janvier","Février","Mars", "Avril", "Mai", "Juin", "Juillet",
 "Aout","Septembre","Octobre", "Novembre", "Décembre"];
 
 
-setInterval(() => {
-    const time = new Date();
-    const month = time.getMonth();
-    const date = time.getDate();
-    let day = time.getDay(); // Jour de la semaine (0 = dimanche, 1 = lundi, ..., 6 = samedi)
-    day = (day === 0) ? 6 : day - 1; // Décalage d'une journée en arrière
-    dateE1.innerHTML= days[day] + " " + date + " "+ months[month] + " "; 
-},  1000 );//appelle l'API une fois/heure
 
 
 // Charger le fichier de configuration JSON
@@ -54,29 +36,33 @@ fetch('config.json')
   });
 
   function showWeatherData(weatherData){
-    const humidityValue = weatherData.main.humidity;
-    const temperatureDayValue = weatherData.main.temp;
-    const temperatureFeelLikeValue = weatherData.main.feels_like;
-    const pressureValue = weatherData.main.pressure;
-    const windSpeedValue = weatherData.wind.speed;
-    const cityNameValue = weatherData.name;
-    const descriptionValue = weatherData.weather[0].description;
-    const countryValue = weatherData.sys.country;
-    const iconValue = weatherData.weather[0].icon;
+    const result = document.getElementById("container");
 
-    humidity.innerHTML = humidityValue + "%";
-    temperatureDay.innerHTML = temperatureDayValue + '&#176 C';
-    temperatureFeelLike.innerHTML = temperatureFeelLikeValue + '&#176 C';
-    pressure.innerHTML = pressureValue + " hPa"; 
-    windSpeed.innerHTML = windSpeedValue + " m/s";
-    cityName.innerHTML = cityNameValue;
-    description.innerHTML = descriptionValue;
-    country.innerHTML = countryValue;
-    const iconUrl = `http://openweathermap.org/img/wn/${iconValue}.png`;
-    icon.src= iconUrl;
+    const iconBaseUrl = 'https://openweathermap.org/img/wn/';
+    const iconValue = weatherData.weather[0].icon;
+    const iconUrl = iconBaseUrl + iconValue + '.png';
+
+    result.innerHTML = ' <div class="other-info" id="info"><div class="header"><div id="cityName">'+ weatherData.name+'</div>'+
+    '<div id="country">'+ weatherData.sys.country+'</div></div></br>'+
+    '<div id="dateE1">'+Date()+'</div></br><hr></br>'+
+    '<img src="'+iconUrl+'" id="weather-icon"  srcset="">'+
+    '<div id="description">'+weatherData.weather[0].description+'</div></br><hr></br>'+
+    '<div><div class="weather-item"><div>Température :</div><div id="temperatureDay" id="temperatureDay">'+Math.round(weatherData.main.temp *10)/10  +'&deg C </div></div></br>'+
+    '<div class="weather-item"><div>Ressentie :</div><div id="temperatureFeelLike" id="temperatureFeelLike">'+ Math.round(weatherData.main.feels_like*10)/10 +'&deg C </div></div></br><div class="weather-item">'+
+    '<div>Humidité</div><div id="humidity" >'+weatherData.main.humidity+' &percnt; </div></div></br><div class="weather-item">'+
+    '<div>Pression : </div><div id="pressure" >'+weatherData.main.pressure+' hPa</div></div></br><div class="weather-item">'+
+    '<div>Vitesse du vent </div><div id="wind-speed">'+weatherData.wind.speed+' m/s</div></div></div></br></div>';
 }
 
-
+//appelle l'API une fois/heure
+setInterval(() => {
+  const time = new Date();
+  const month = time.getMonth();
+  const date = time.getDate();
+  let day = time.getDay(); // Jour de la semaine (0 = dimanche, 1 = lundi, ..., 6 = samedi)
+  day = (day === 0) ? 6 : day - 1; // Décalage d'une journée en arrière
+  dateE1.innerHTML= days[day] + " " + date + " "+ months[month] + " "; 
+},  1000 );
 
   
 
